@@ -17,7 +17,7 @@
       "sources": [
         {
           "source_system": "openclaw-legacy",
-          "source_path": "knowledge/etsy-shop-playbook.md",
+          "source_path": "knowledge/shop-playbook.md",
           "sha256": "c1d5581232ee1cf61cdc787883af52133a9fca08ba5f7a4b11a37e4ff2364df7",
           "source_modified_at": "2026-07-14T21:58:39-07:00",
           "migration_use": "synthesized"

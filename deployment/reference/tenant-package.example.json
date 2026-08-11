@@ -1,0 +1,18 @@
+{
+  "attestation_key_ref": "secretref://tenant-example/kms/truth-key",
+  "attestation_provider": "external-kms",
+  "backup_database_role_ref": "secretref://tenant-example/postgresql/backup-role",
+  "business_id": "business-example",
+  "dashboard_auth": "oidc",
+  "dashboard_origin": "https://agent-os.example.invalid",
+  "database_adapter": "postgresql",
+  "external_side_effects_enabled": false,
+  "image_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "migration_database_role_ref": "secretref://tenant-example/postgresql/migration-role",
+  "release_version": "2.0.0-alpha.19",
+  "runtime_database_role_ref": "secretref://tenant-example/postgresql/runtime-role",
+  "secret_provider": "vault",
+  "telemetry_mode": "metadata-only",
+  "tenant_id": "tenant-example",
+  "tls_required": true
+}

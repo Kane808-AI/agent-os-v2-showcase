@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-07-28",
+  "systems": [
+    {
+      "id": "openclaw-legacy",
+      "display_name": "OpenClaw Legacy",
+      "path": "/Users/operator/.openclaw/workspace",
+      "status": "live-legacy",
+      "approx_size": "7.4G",
+      "installed_launch_agent_files": 54,
+      "nested_git_repositories_observed": 13,
+      "policy": "read-only-source",
+      "notes": [
+        "Contains remaining scripts, environments, memory, and runtime data used by Agent OS v1 jobs.",
+        "Do not copy wholesale.",
+        "Do not rename or delete during the parallel period."
+      ]
+    },
+    {
+      "id": "agent-os-v1",
+      "display_name": "Agent OS v1 Prototype",
+      "path": "/Users/operator/agent-os",
+      "status": "live-prototype",
+      "approx_size": "5.5M",
+      "installed_launch_agent_files": 21,
+      "commits_ahead_of_remote_observed": 16,
+      "openclaw_referencing_files_observed": 41,
+      "absolute_user_path_files_observed": 55,
+      "policy": "freeze-and-preserve",
+      "notes": [
+        "Private GitHub remote exists.",
+        "Preserve the unpushed commits before migration work touches live state.",
+        "Physical directory rename would break installed launch agents."
+      ]
+    },
+    {
+      "id": "agent-os-v2",
+      "display_name": "Agent OS v2 Platform",
+      "path": "/Users/operator/Documents/Agent OS",
+      "status": "foundation-build",
+      "policy": "new-source-of-truth",
+      "notes": [
+        "No live runtime dependencies.",
+        "All new code, schemas, tests, and product documentation originate here."
+      ]
+    }
+  ],
+  "global_cutover_rules": [
+    "No live capability is disabled before its v2 replacement passes acceptance and rollback tests.",
+    "Every migrated record retains provenance.",
+    "Secrets and runtime data are never copied into Git.",
+    "OpenClaw Legacy and Agent OS v1 remain explicitly named in all migration records."
+  ]
+}

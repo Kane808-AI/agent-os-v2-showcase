@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.agentos.atlas-telegram</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>__PYTHON__</string>
+        <string>-u</string>
+        <string>-m</string>
+        <string>agent_os.cli</string>
+        <string>telegram-chat</string>
+        <string>--db</string>
+        <string>__REPO__/state/atlas-channel.db</string>
+        <string>--token-env</string>
+        <string>__REPO__/data/local-pilot/secrets/telegram.env</string>
+        <string>--anthropic-env</string>
+        <string>__REPO__/data/local-pilot/secrets/anthropic.env</string>
+        <string>--bot-ref</string>
+        <string>__BOT_REF__</string>
+        <string>--owner-user-id</string>
+        <string>__OWNER_USER_ID__</string>
+        <string>--tenant-id</string>
+        <string>__TENANT_ID__</string>
+        <string>--business-id</string>
+        <string>__BUSINESS_ID__</string>
+        <string>--outbox</string>
+        <string>__REPO__/state/telegram-outbox</string>
+        <string>--seed</string>
+        <string>--standing-approval</string>
+        <string>--poll-timeout</string>
+        <string>25</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>__REPO__/src</string>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>__REPO__</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+    <key>StandardOutPath</key>
+    <string>__REPO__/logs/atlas-telegram.log</string>
+    <key>StandardErrorPath</key>
+    <string>__REPO__/logs/atlas-telegram.log</string>
+</dict>
+</plist>

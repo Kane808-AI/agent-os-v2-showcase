@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "defined-not-activated",
+  "businesses": [
+    {"business_key": "services", "display_name": "Northwind Services and AI Consulting"},
+    {"business_key": "commerce", "display_name": "Commerce and Affiliate Properties"},
+    {"business_key": "media", "display_name": "Personal Brand and Media"},
+    {"business_key": "ventures", "display_name": "Software and Physical Product Ventures"}
+  ],
+  "assignments": [
+    {"actor_id": "atlas", "display_name": "Atlas", "constitution_id": "atlas", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "services-gm", "display_name": "Northwind Services GM", "constitution_id": "business-owner", "business_keys": ["services"]},
+    {"actor_id": "commerce-gm", "display_name": "Commerce GM", "constitution_id": "business-owner", "business_keys": ["commerce"]},
+    {"actor_id": "media-gm", "display_name": "Media GM", "constitution_id": "business-owner", "business_keys": ["media"]},
+    {"actor_id": "venture-studio-gm", "display_name": "Venture Studio GM", "constitution_id": "business-owner", "business_keys": ["ventures"]},
+    {"actor_id": "strategy-advisor", "display_name": "Strategy Advisor", "constitution_id": "strategy-advisor", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "operations-manager", "display_name": "Operations Manager", "constitution_id": "operations-manager", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "marketing-lead", "display_name": "Marketing Lead", "constitution_id": "marketing-lead", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "acquisition-manager", "display_name": "Paid Acquisition Manager", "constitution_id": "acquisition-manager", "business_keys": ["services", "commerce", "media"]},
+    {"actor_id": "sales-manager", "display_name": "Sales Manager", "constitution_id": "sales-manager", "business_keys": ["services"]},
+    {"actor_id": "customer-success-manager", "display_name": "Customer Success Manager", "constitution_id": "customer-success-manager", "business_keys": ["services", "ventures"]},
+    {"actor_id": "commerce-operator", "display_name": "Commerce Operator", "constitution_id": "commerce-operator", "business_keys": ["commerce"]},
+    {"actor_id": "creative-producer", "display_name": "Creative Producer", "constitution_id": "creative-producer", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "channel-operator", "display_name": "Channel Operator", "constitution_id": "channel-operator", "business_keys": ["services", "commerce", "media"]},
+    {"actor_id": "product-manager", "display_name": "Product Manager", "constitution_id": "product-manager", "business_keys": ["ventures"]},
+    {"actor_id": "software-engineer", "display_name": "Software Engineer", "constitution_id": "software-engineer", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "research-analyst", "display_name": "Research Analyst", "constitution_id": "research-analyst", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "qa-verifier", "display_name": "QA Verifier", "constitution_id": "qa-verifier", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "accounting-controller", "display_name": "Accounting Controller", "constitution_id": "accounting-controller", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "finance-lead", "display_name": "Finance Lead", "constitution_id": "finance-lead", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "knowledge-steward", "display_name": "Knowledge Steward", "constitution_id": "knowledge-steward", "business_keys": ["services", "commerce", "media", "ventures"]},
+    {"actor_id": "platform-reliability", "display_name": "Platform Reliability", "constitution_id": "platform-reliability", "business_keys": ["services", "commerce", "media", "ventures"]}
+  ],
+  "activation_requirements": [
+    "Create tenant and business identities",
+    "Bind actors to exact business scopes",
+    "Assign only required capabilities",
+    "Install runtime tool allowlists and authority envelopes",
+    "Pass role evaluations and shadow canaries",
+    "Configure accountable human escalation and kill switches"
+  ]
+}

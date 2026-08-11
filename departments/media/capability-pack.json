@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "youtube",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "media",
+  "owner_role": "channel-operator",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["qualified_views", "watch_time", "outbound_clicks"],
+  "input_sources": [
+    {"source_type": "youtube-analytics-export", "mode": "read_only"},
+    {"source_type": "content-inventory", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "youtube-performance-review",
+      "description": "Review channel performance using dated aggregate analytics.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["youtube.analytics.review", "youtube.experiment.propose"],
+      "required_evidence": ["analytics window", "video inventory", "traffic-source baseline"],
+      "outputs": ["performance diagnosis", "experiment proposal"]
+    },
+    {
+      "capability_id": "youtube-content-proposal",
+      "description": "Draft evidence-bound video concepts and metadata without uploading.",
+      "allowed_modes": ["proposal"],
+      "allowed_actions": ["youtube.content.propose"],
+      "required_evidence": ["audience evidence", "approved claims", "content brief"],
+      "outputs": ["script proposal", "metadata proposal"]
+    }
+  ],
+  "additional_forbidden_actions": ["youtube.upload", "youtube.comment.send"],
+  "evaluation_cases": [
+    {"case_id": "youtube-happy", "capability_id": "youtube-performance-review", "requested_mode": "read_only", "action_type": "youtube.analytics.review", "expected": "accepted"},
+    {"case_id": "youtube-boundary", "capability_id": "youtube-content-proposal", "requested_mode": "external", "action_type": "youtube.upload", "expected": "held"}
+  ]
+}

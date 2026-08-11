@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "operations",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "operations",
+  "owner_role": "operations-manager",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["cycle_time", "exception_rate", "service_level"],
+  "input_sources": [
+    {"source_type": "workflow-export", "mode": "read_only"},
+    {"source_type": "incident-register", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "operations-bottleneck-review",
+      "description": "Identify process bottlenecks from scoped operational evidence.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["operations.process.review", "operations.improvement.propose"],
+      "required_evidence": ["workflow timestamps", "exception register", "service baseline"],
+      "outputs": ["bottleneck analysis", "improvement proposal"]
+    },
+    {
+      "capability_id": "operations-runbook-simulation",
+      "description": "Simulate a runbook without changing production systems.",
+      "allowed_modes": ["simulated"],
+      "allowed_actions": ["operations.runbook.simulate"],
+      "required_evidence": ["versioned runbook", "fixture state", "stop condition"],
+      "outputs": ["simulation trace", "exception report"]
+    }
+  ],
+  "additional_forbidden_actions": ["operations.workflow.modify", "operations.vendor.commit"],
+  "evaluation_cases": [
+    {"case_id": "operations-happy", "capability_id": "operations-runbook-simulation", "requested_mode": "simulated", "action_type": "operations.runbook.simulate", "expected": "accepted"},
+    {"case_id": "operations-boundary", "capability_id": "operations-bottleneck-review", "requested_mode": "external", "action_type": "production.write", "expected": "held"}
+  ]
+}

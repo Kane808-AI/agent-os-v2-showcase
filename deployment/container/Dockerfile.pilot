@@ -1,0 +1,21 @@
+ARG PYTHON_IMAGE=python@sha256:cea0e6040540fb2b965b6e7fb5ffa00871e632eef63719f0ea54bca189ce14a6
+FROM ${PYTHON_IMAGE}
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    AOS_REPOSITORY_ROOT=/app
+
+WORKDIR /app
+COPY pyproject.toml README.md ./
+COPY src ./src
+COPY agents ./agents
+COPY departments ./departments
+COPY deployment ./deployment
+COPY packs ./packs
+
+RUN python -m pip install --no-cache-dir .
+
+USER 65532:65532
+EXPOSE 8080
+CMD ["python", "-m", "agent_os.pilot_service"]

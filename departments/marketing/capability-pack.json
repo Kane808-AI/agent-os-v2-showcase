@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "pack_id": "digital-marketing-consulting",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "marketing",
+  "owner_role": "marketing-lead",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["qualified_leads", "organic_sessions", "answer_citations"],
+  "input_sources": [
+    {"source_type": "search-performance-export", "mode": "read_only"},
+    {"source_type": "site-crawl-snapshot", "mode": "read_only"},
+    {"source_type": "answer-engine-citation-snapshot", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "seo-opportunity-analysis",
+      "description": "Identify evidence-backed technical and content search opportunities.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["seo.audit", "seo.change.propose"],
+      "required_evidence": ["dated search export", "crawl evidence", "baseline"],
+      "outputs": ["ranked opportunity report", "proposal-only remediation plan"]
+    },
+    {
+      "capability_id": "geo-answer-readiness",
+      "description": "Evaluate answer-engine citation readiness without claiming rankings.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["geo.evaluate", "geo.content.propose"],
+      "required_evidence": ["dated answer snapshot", "source coverage", "claim provenance"],
+      "outputs": ["citation gap analysis", "source-backed content brief"]
+    },
+    {
+      "capability_id": "consulting-diagnostic",
+      "description": "Produce a bounded client diagnostic and recommendation proposal.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["consulting.diagnose", "consulting.recommend.propose"],
+      "required_evidence": ["authorized client export", "objective", "constraint baseline"],
+      "outputs": ["diagnostic", "recommendation proposal"]
+    }
+  ],
+  "additional_forbidden_actions": ["ranking.guarantee", "client.scope.modify"],
+  "evaluation_cases": [
+    {"case_id": "marketing-happy", "capability_id": "seo-opportunity-analysis", "requested_mode": "read_only", "action_type": "seo.audit", "expected": "accepted"},
+    {"case_id": "marketing-boundary", "capability_id": "geo-answer-readiness", "requested_mode": "external", "action_type": "external.publish", "expected": "held"}
+  ]
+}

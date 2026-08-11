@@ -1,0 +1,276 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "knowledge_id": "northwind-etsy-digital-listing-guardrails",
+      "version": "1.0.0",
+      "title": "Etsy Digital Listing Guardrails",
+      "kind": "procedure",
+      "status": "candidate",
+      "scope": {
+        "scope_type": "reference-pack",
+        "tenant_key": "northwind-reference",
+        "business_key": "commerce"
+      },
+      "topics": ["etsy", "digital-products", "listing-quality", "disclosure"],
+      "content_path": "northwind/commerce/etsy-digital-listing-guardrails.md",
+      "sources": [
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/etsy-shop-playbook.md",
+          "sha256": "c1d5581232ee1cf61cdc787883af52133a9fca08ba5f7a4b11a37e4ff2364df7",
+          "source_modified_at": "2026-07-14T21:58:39-07:00",
+          "migration_use": "synthesized"
+        }
+      ],
+      "migrated_at": "2026-07-28T20:00:00-07:00",
+      "reviewed_by": null,
+      "confidence": 0.72,
+      "freshness": {
+        "class": "periodic",
+        "observed_at": "2026-07-14T21:58:39-07:00",
+        "review_by": "2026-08-31T17:00:00-07:00"
+      },
+      "retrieval": {"research": true, "fact": false, "procedure": false},
+      "claim_key": null,
+      "claim_value": null,
+      "conflicts_with": [],
+      "supersedes": [],
+      "tags": ["northwind", "etsy-shop", "commerce", "quality-gate"]
+    },
+    {
+      "knowledge_id": "northwind-etsy-product-strategy-candidate",
+      "version": "1.0.0",
+      "title": "Etsy Product Strategy Candidate",
+      "kind": "strategy",
+      "status": "candidate",
+      "scope": {
+        "scope_type": "reference-pack",
+        "tenant_key": "northwind-reference",
+        "business_key": "commerce"
+      },
+      "topics": ["etsy", "product-strategy", "experiments", "unit-economics"],
+      "content_path": "northwind/commerce/etsy-product-strategy-candidate.md",
+      "sources": [
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/etsy-shop-kb.md",
+          "sha256": "a91f31311b5d2838af06b489a545a19989ea905f24def05b4527e27defe9acd7",
+          "source_modified_at": "2026-05-28T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/etsy-shop-revised-strategy.md",
+          "sha256": "911c99991d57e7ec9d72e25722edff7226389e626ee6108bf250f8d22f2fe7a4",
+          "source_modified_at": "2026-05-18T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/etsy-shop-sage-review.md",
+          "sha256": "889c9fcb899522c28dd30396d5de1ef8648cbd419cbd8b397bd5f05093ddf9a8",
+          "source_modified_at": "2026-05-18T12:00:00-07:00",
+          "migration_use": "evidence-only"
+        }
+      ],
+      "migrated_at": "2026-07-28T20:00:00-07:00",
+      "reviewed_by": null,
+      "confidence": 0.58,
+      "freshness": {
+        "class": "volatile",
+        "observed_at": "2026-05-28T12:00:00-07:00",
+        "review_by": "2026-08-31T17:00:00-07:00"
+      },
+      "retrieval": {"research": true, "fact": false, "procedure": false},
+      "claim_key": null,
+      "claim_value": null,
+      "conflicts_with": [],
+      "supersedes": [],
+      "tags": ["northwind", "etsy-shop", "commerce", "hypothesis"]
+    },
+    {
+      "knowledge_id": "northwind-tiktok-content-paid-testing",
+      "version": "1.0.0",
+      "title": "TikTok Content and Paid Testing",
+      "kind": "strategy",
+      "status": "candidate",
+      "scope": {
+        "scope_type": "reference-pack",
+        "tenant_key": "northwind-reference",
+        "business_key": "media"
+      },
+      "topics": ["tiktok", "content", "paid-media", "attribution"],
+      "content_path": "northwind/media/tiktok-content-paid-testing.md",
+      "sources": [
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/marketing/tiktok-playbook.md",
+          "sha256": "5c2e1300b3cfd3cfe12fd9d77bc012ecff91e84069d2d49849a61fd318b0c452",
+          "source_modified_at": "2026-03-19T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/tiktok/tiktok-ads-addendum.md",
+          "sha256": "86372e26507b813d3aedabde96e2e8f52e6999af6faae894cdaf7d944df49ae1",
+          "source_modified_at": "2026-05-07T12:00:00-07:00",
+          "migration_use": "synthesized"
+        }
+      ],
+      "migrated_at": "2026-07-28T20:00:00-07:00",
+      "reviewed_by": null,
+      "confidence": 0.6,
+      "freshness": {
+        "class": "volatile",
+        "observed_at": "2026-05-07T12:00:00-07:00",
+        "review_by": "2026-08-07T17:00:00-07:00"
+      },
+      "retrieval": {"research": true, "fact": false, "procedure": false},
+      "claim_key": null,
+      "claim_value": null,
+      "conflicts_with": [],
+      "supersedes": [],
+      "tags": ["northwind", "personal-brand", "media", "bounded-experiment"]
+    },
+    {
+      "knowledge_id": "northwind-tiktok-commerce-risk-gates",
+      "version": "1.0.0",
+      "title": "TikTok Commerce Risk Gates",
+      "kind": "procedure",
+      "status": "candidate",
+      "scope": {
+        "scope_type": "reference-pack",
+        "tenant_key": "northwind-reference",
+        "business_key": "commerce"
+      },
+      "topics": ["tiktok-shop", "affiliate", "commerce", "risk-gates"],
+      "content_path": "northwind/commerce/tiktok-commerce-risk-gates.md",
+      "sources": [
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "projects/tiktok-shop/tiktok-shop-playbook.md",
+          "sha256": "c6295a8c5cef746ca64b990308b5b5c2e2062235f0a408425c041039a6672733",
+          "source_modified_at": "2026-06-05T12:00:00-07:00",
+          "migration_use": "synthesized"
+        }
+      ],
+      "migrated_at": "2026-07-28T20:00:00-07:00",
+      "reviewed_by": null,
+      "confidence": 0.61,
+      "freshness": {
+        "class": "volatile",
+        "observed_at": "2026-06-05T12:00:00-07:00",
+        "review_by": "2026-08-05T17:00:00-07:00"
+      },
+      "retrieval": {"research": true, "fact": false, "procedure": false},
+      "claim_key": null,
+      "claim_value": null,
+      "conflicts_with": [],
+      "supersedes": [],
+      "tags": ["northwind", "commerce", "unit-economics", "manual-pilot"]
+    },
+    {
+      "knowledge_id": "northwind-ghl-whitelabel-operating-guardrails",
+      "version": "1.0.0",
+      "title": "GHL and WhiteLabel Operating Guardrails",
+      "kind": "procedure",
+      "status": "candidate",
+      "scope": {
+        "scope_type": "reference-pack",
+        "tenant_key": "northwind-reference",
+        "business_key": "services"
+      },
+      "topics": ["ghl", "whitelabel", "crm", "workflows", "webhooks"],
+      "content_path": "northwind/services/ghl-whitelabel-operating-guardrails.md",
+      "sources": [
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "memory/ghl/ghl-overview.md",
+          "sha256": "be624536dedf49fa5ecf6a4e6eb02f9c7efa11f016951360d7766a8659fb8671",
+          "source_modified_at": "2026-03-24T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "memory/ghl/ghl-pipelines-crm.md",
+          "sha256": "41d37cfccb5d46206df08c9b897e3c60855500ea2be1e91b19d3aa7e9e8ae89e",
+          "source_modified_at": "2026-03-24T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "memory/ghl/ghl-workflows.md",
+          "sha256": "a57e3662ed8d311192d51e5d0abe0b8fe1ad1afd24b333e0b14d30b2d71c45f4",
+          "source_modified_at": "2026-03-24T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "memory/ghl/ghl-webhooks-n8n.md",
+          "sha256": "7f5d4e2b48d637660d7c438883326c38b3731ad22a6fa6bb9108d91076cdaa24",
+          "source_modified_at": "2026-03-24T12:00:00-07:00",
+          "migration_use": "synthesized"
+        }
+      ],
+      "migrated_at": "2026-07-28T20:00:00-07:00",
+      "reviewed_by": null,
+      "confidence": 0.64,
+      "freshness": {
+        "class": "volatile",
+        "observed_at": "2026-03-24T12:00:00-07:00",
+        "review_by": "2026-06-24T17:00:00-07:00"
+      },
+      "retrieval": {"research": true, "fact": false, "procedure": false},
+      "claim_key": null,
+      "claim_value": null,
+      "conflicts_with": [],
+      "supersedes": [],
+      "tags": ["northwind", "services", "tenant-isolation", "integration-safety"]
+    },
+    {
+      "knowledge_id": "northwind-pinterest-affiliate-validation",
+      "version": "1.0.0",
+      "title": "Pinterest Affiliate Delivery Validation",
+      "kind": "historical",
+      "status": "candidate",
+      "scope": {
+        "scope_type": "reference-pack",
+        "tenant_key": "northwind-reference",
+        "business_key": "commerce"
+      },
+      "topics": ["pinterest", "affiliate", "delivery-verification", "attribution"],
+      "content_path": "northwind/commerce/pinterest-affiliate-validation.md",
+      "sources": [
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "projects/legacy-affiliate/pinterest-strategy-audit-2026-07-14.md",
+          "sha256": "87b1417e89dc0a677005f3a46e350f06c771464caba0f4aec1207ad70e4f0352",
+          "source_modified_at": "2026-07-14T12:00:00-07:00",
+          "migration_use": "synthesized"
+        },
+        {
+          "source_system": "openclaw-legacy",
+          "source_path": "knowledge/marketing/gadget-pinterest-pin-spec.md",
+          "sha256": "9ccadc6d83e2b079f3ce67f2c74c0b9a81351bd80140f3dd9f837f780d2046d0",
+          "source_modified_at": "2026-07-14T12:00:00-07:00",
+          "migration_use": "synthesized"
+        }
+      ],
+      "migrated_at": "2026-07-28T20:00:00-07:00",
+      "reviewed_by": null,
+      "confidence": 0.78,
+      "freshness": {
+        "class": "periodic",
+        "observed_at": "2026-07-14T12:00:00-07:00",
+        "review_by": "2026-08-14T17:00:00-07:00"
+      },
+      "retrieval": {"research": true, "fact": false, "procedure": false},
+      "claim_key": null,
+      "claim_value": null,
+      "conflicts_with": [],
+      "supersedes": [],
+      "tags": ["northwind", "commerce", "incident-learning", "outcome-truth"]
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-os.local/schemas/knowledge-record-v1.json",
+  "title": "Agent OS Governed Knowledge Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "knowledge_id",
+    "version",
+    "title",
+    "kind",
+    "status",
+    "scope",
+    "topics",
+    "content_path",
+    "sources",
+    "migrated_at",
+    "reviewed_by",
+    "confidence",
+    "freshness",
+    "retrieval",
+    "claim_key",
+    "claim_value",
+    "conflicts_with",
+    "supersedes",
+    "tags"
+  ],
+  "properties": {
+    "knowledge_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "title": {"type": "string", "minLength": 5},
+    "kind": {"enum": ["fact", "procedure", "strategy", "reference", "historical"]},
+    "status": {
+      "enum": [
+        "candidate",
+        "evaluated",
+        "verified",
+        "approved-procedure",
+        "rejected",
+        "stale",
+        "superseded",
+        "archive-only"
+      ]
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope_type", "tenant_key", "business_key"],
+      "properties": {
+        "scope_type": {"enum": ["platform", "reference-pack", "tenant"]},
+        "tenant_key": {"type": ["string", "null"]},
+        "business_key": {"type": ["string", "null"]}
+      }
+    },
+    "topics": {"$ref": "#/$defs/nonEmptyStrings"},
+    "content_path": {"type": "string", "pattern": "^[a-zA-Z0-9_./-]+\\.md$"},
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "source_system",
+          "source_path",
+          "sha256",
+          "source_modified_at",
+          "migration_use"
+        ],
+        "properties": {
+          "source_system": {"enum": ["openclaw-legacy", "agent-os-v1", "human", "external"]},
+          "source_path": {"type": "string", "minLength": 1},
+          "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "source_modified_at": {"type": "string", "format": "date-time"},
+          "migration_use": {"enum": ["synthesized", "evidence-only", "review-only"]}
+        }
+      }
+    },
+    "migrated_at": {"type": "string", "format": "date-time"},
+    "reviewed_by": {"type": ["string", "null"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "observed_at", "review_by"],
+      "properties": {
+        "class": {"enum": ["stable", "periodic", "volatile"]},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "review_by": {"type": "string", "format": "date-time"}
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["research", "fact", "procedure"],
+      "properties": {
+        "research": {"type": "boolean"},
+        "fact": {"type": "boolean"},
+        "procedure": {"type": "boolean"}
+      }
+    },
+    "claim_key": {"type": ["string", "null"]},
+    "claim_value": {"type": ["string", "null"]},
+    "conflicts_with": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+      "uniqueItems": true
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+      "uniqueItems": true
+    },
+    "tags": {"$ref": "#/$defs/nonEmptyStrings"}
+  },
+  "$defs": {
+    "nonEmptyStrings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "physical-products",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "physical-products",
+  "owner_role": "product-manager",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["validated_demand", "gross_margin", "return_rate"],
+  "input_sources": [
+    {"source_type": "marketplace-demand-export", "mode": "read_only"},
+    {"source_type": "cost-sheet", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "physical-product-demand-review",
+      "description": "Evaluate product demand and unit economics without ordering inventory.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["physical-product.demand.review", "physical-product.test.propose"],
+      "required_evidence": ["dated demand source", "unit cost", "return assumption"],
+      "outputs": ["demand scorecard", "bounded test proposal"]
+    },
+    {
+      "capability_id": "physical-product-listing-proposal",
+      "description": "Draft evidence-backed listing content without creating a listing.",
+      "allowed_modes": ["proposal"],
+      "allowed_actions": ["physical-product.listing.propose"],
+      "required_evidence": ["product facts", "approved claims", "channel rules"],
+      "outputs": ["listing proposal", "claim provenance map"]
+    }
+  ],
+  "additional_forbidden_actions": ["inventory.purchase", "marketplace.listing.create"],
+  "evaluation_cases": [
+    {"case_id": "physical-products-happy", "capability_id": "physical-product-demand-review", "requested_mode": "read_only", "action_type": "physical-product.demand.review", "expected": "accepted"},
+    {"case_id": "physical-products-boundary", "capability_id": "physical-product-listing-proposal", "requested_mode": "external", "action_type": "marketplace.listing.create", "expected": "held"}
+  ]
+}

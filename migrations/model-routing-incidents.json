@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-30T12:00:00-07:00",
+  "source_system": "openclaw-legacy",
+  "sources": [
+    {
+      "source_path": "CLAUDE.md",
+      "sha256": "5aae62dc7cadfe0c604294592b72845d931c95c9c86070c7694a7951d8478568"
+    },
+    {
+      "source_path": "proposals/agent-os-v2-proposal.md",
+      "sha256": "7c830bef77c65e4038d40a150deb619109142a6a0c850b25b0b187c05284ff11"
+    },
+    {
+      "source_path": "reports/openclaw-upgrade-audit-2026-07-13.md",
+      "sha256": "ab12d04ea3c5695f7516550cea33e8ef91d63ddf07d5c37108e8b0947503840c"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "ROUTE-INC-001",
+      "lesson": "Opaque automatic routing can silently select an expensive or incompatible model.",
+      "v2_control": "Exact versioned provider references are mandatory; auto and latest aliases are rejected.",
+      "regression_test": "test_opaque_auto_latest_and_plaintext_credentials_are_refused"
+    },
+    {
+      "id": "ROUTE-INC-002",
+      "lesson": "A rate-limited free primary can cause a retry and fallback cascade.",
+      "v2_control": "Consecutive rate-limit outcomes open a durable circuit and one serialized cooldown probe is allowed.",
+      "regression_test": "test_three_failures_open_circuit_and_cooldown_allows_one_probe"
+    },
+    {
+      "id": "ROUTE-INC-003",
+      "lesson": "Subscription or OAuth access can be revoked independently of model health.",
+      "v2_control": "Only tenant-scoped credential references are stored; an authentication failure opens only that scoped circuit.",
+      "regression_test": "test_auth_failure_is_tenant_isolated"
+    },
+    {
+      "id": "ROUTE-INC-004",
+      "lesson": "Mid-task failover can change behavior without an attributable decision.",
+      "v2_control": "Fallback requires a recorded failure and produces a new immutable decision linked to the prior decision.",
+      "regression_test": "test_fallback_requires_failure_and_creates_linked_new_decision"
+    },
+    {
+      "id": "ROUTE-INC-005",
+      "lesson": "A newly available or aliased model is not necessarily evaluated or production compatible.",
+      "v2_control": "Catalog entries require an evaluation version and only an explicitly activated immutable catalog can route.",
+      "regression_test": "test_routes_by_capability_policy_cost_and_stable_order"
+    }
+  ]
+}

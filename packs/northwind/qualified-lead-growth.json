@@ -1,0 +1,29 @@
+{
+  "capability": {
+    "capability_id": "growth.qualified-lead-planning",
+    "display_name": "Qualified Lead Growth Planning",
+    "description": "Diagnose lead-generation evidence and design bounded acquisition experiments.",
+    "required_role": "marketing",
+    "action_types": [
+      "growth.funnel.diagnose",
+      "growth.experiment.design"
+    ]
+  },
+  "planner_id": "playbook.northwind.qualified-leads.v1",
+  "hypothesis_template": "Because the current qualified-lead count is {current} against a target of {target}, and the observed conversion rate is {conversion_rate}, the next bounded move is to diagnose the funnel before designing one measurable acquisition experiment.",
+  "expected_metric": "qualified_leads",
+  "steps": [
+    {
+      "title": "Diagnose the qualified-lead funnel",
+      "rationale": "Separate traffic, conversion, and offer constraints using the supplied evidence.",
+      "action_type": "growth.funnel.diagnose",
+      "expected_output": "A cited funnel diagnosis with the primary constraint and confidence level."
+    },
+    {
+      "title": "Design one bounded acquisition experiment",
+      "rationale": "Turn the diagnosed constraint into a measurable test without publishing or spending.",
+      "action_type": "growth.experiment.design",
+      "expected_output": "An experiment brief with audience, offer, channel, metric, stop condition, and proposed budget requiring approval."
+    }
+  ]
+}

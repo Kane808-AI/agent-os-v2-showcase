@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "policy_version": "1.0.0",
+  "evaluator_version": "capability-pack-v1",
+  "allowed_modes": ["read_only", "proposal", "simulated"],
+  "global_forbidden_actions": [
+    "ads.spend.execute",
+    "affiliate.link.modify",
+    "banking.money-movement",
+    "external.contact",
+    "external.publish",
+    "payout.modify",
+    "production.write"
+  ],
+  "required_pack_ids": [
+    "digital-marketing-consulting",
+    "youtube",
+    "applications",
+    "physical-products",
+    "commerce",
+    "finance",
+    "accounting",
+    "sales",
+    "operations",
+    "customer-success",
+    "research",
+    "engineering",
+    "qa"
+  ]
+}

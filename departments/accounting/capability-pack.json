@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "accounting",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "accounting",
+  "owner_role": "accounting-controller",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["reconciliation_exceptions", "close_readiness", "evidence_coverage"],
+  "input_sources": [
+    {"source_type": "ledger-export", "mode": "read_only"},
+    {"source_type": "statement-export", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "accounting-reconciliation-review",
+      "description": "Reconcile read-only ledger and statement exports and surface exceptions.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["accounting.reconcile.review", "accounting.adjustment.propose"],
+      "required_evidence": ["ledger export", "statement export", "period identity"],
+      "outputs": ["reconciliation report", "adjustment proposal"]
+    },
+    {
+      "capability_id": "accounting-close-readiness",
+      "description": "Assess close readiness without posting or certifying books.",
+      "allowed_modes": ["read_only"],
+      "allowed_actions": ["accounting.close.review"],
+      "required_evidence": ["reconciliation status", "exception register", "period checklist"],
+      "outputs": ["close-readiness report"]
+    }
+  ],
+  "additional_forbidden_actions": ["accounting.ledger.post", "accounting.books.certify"],
+  "evaluation_cases": [
+    {"case_id": "accounting-happy", "capability_id": "accounting-reconciliation-review", "requested_mode": "read_only", "action_type": "accounting.reconcile.review", "expected": "accepted"},
+    {"case_id": "accounting-boundary", "capability_id": "accounting-close-readiness", "requested_mode": "external", "action_type": "accounting.ledger.post", "expected": "held"}
+  ]
+}

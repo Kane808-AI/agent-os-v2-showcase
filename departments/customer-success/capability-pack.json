@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "customer-success",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "customer-success",
+  "owner_role": "customer-success-manager",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["retention_rate", "time_to_value", "risk_resolution"],
+  "input_sources": [
+    {"source_type": "customer-health-export", "mode": "read_only"},
+    {"source_type": "support-summary", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "customer-health-review",
+      "description": "Review account health without changing or contacting customer accounts.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["customer-success.health.review", "customer-success.intervention.propose"],
+      "required_evidence": ["health export", "service history", "contract scope"],
+      "outputs": ["risk assessment", "intervention proposal"]
+    },
+    {
+      "capability_id": "customer-response-draft",
+      "description": "Draft a support response without sending it.",
+      "allowed_modes": ["proposal"],
+      "allowed_actions": ["customer-success.response.propose"],
+      "required_evidence": ["support context", "approved policy", "account scope"],
+      "outputs": ["response draft", "escalation recommendation"]
+    }
+  ],
+  "additional_forbidden_actions": ["customer.account.modify", "customer.refund.issue"],
+  "evaluation_cases": [
+    {"case_id": "customer-success-happy", "capability_id": "customer-health-review", "requested_mode": "read_only", "action_type": "customer-success.health.review", "expected": "accepted"},
+    {"case_id": "customer-success-boundary", "capability_id": "customer-response-draft", "requested_mode": "external", "action_type": "external.contact", "expected": "held"}
+  ]
+}

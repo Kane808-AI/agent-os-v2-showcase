@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "policy_version": "production-qualification-v1",
+  "required_qualifications": [
+    "cost",
+    "observability",
+    "onboarding",
+    "packaging",
+    "persistence",
+    "recovery",
+    "security",
+    "upgrade"
+  ],
+  "required_metrics": [
+    "availability",
+    "backup_age_seconds",
+    "emergency_stop_state",
+    "error_rate",
+    "model_cost_micros",
+    "oldest_work_age_seconds",
+    "queue_depth",
+    "schema_version"
+  ],
+  "production_database": "postgresql",
+  "production_attestation": "external-kms",
+  "allowed_cutover_modes": ["proposal", "read_only", "shadow"],
+  "legacy_disable_available": false,
+  "external_side_effects_enabled": false
+}

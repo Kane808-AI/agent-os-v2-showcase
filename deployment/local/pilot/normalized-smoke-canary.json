@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "mode": "read_only",
+  "tenant_id": "tenant-local-pilot",
+  "business_id": "business-local-pilot",
+  "producer_id": "operations-local-pilot",
+  "verifier_id": "qa-local-pilot",
+  "offer_key": "amazon-local-smoke-offer",
+  "source_ref": "local-smoke-fixture-2026-07-31",
+  "window_start": "2026-07-01T00:00:00+00:00",
+  "window_end": "2026-07-30T00:00:00+00:00",
+  "observed_at": "2026-07-30T01:00:00+00:00",
+  "pinterest": {
+    "impressions": 0,
+    "engagements": 0,
+    "content_clicks": 0,
+    "outbound_clicks": 0
+  },
+  "amazon": {
+    "conversions": 0,
+    "gross_revenue_minor": 0,
+    "commission_minor": 0
+  }
+}

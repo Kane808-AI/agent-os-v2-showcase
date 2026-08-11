@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "commerce",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "commerce",
+  "owner_role": "commerce-operator",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["conversion_rate", "commission_revenue", "gross_margin"],
+  "input_sources": [
+    {"source_type": "channel-analytics-export", "mode": "read_only"},
+    {"source_type": "offer-report", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "commerce-performance-review",
+      "description": "Review privacy-safe aggregate channel and offer performance.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["commerce.performance.review", "commerce.offer.propose"],
+      "required_evidence": ["complete reporting window", "read-only source", "offer evidence"],
+      "outputs": ["directional aggregate measurement", "offer proposal"]
+    },
+    {
+      "capability_id": "commerce-merchandising-proposal",
+      "description": "Propose merchandising changes without altering storefront state.",
+      "allowed_modes": ["proposal"],
+      "allowed_actions": ["commerce.merchandising.propose"],
+      "required_evidence": ["catalog snapshot", "inventory evidence", "margin baseline"],
+      "outputs": ["merchandising proposal"]
+    }
+  ],
+  "additional_forbidden_actions": ["commerce.price.modify", "commerce.order.create"],
+  "evaluation_cases": [
+    {"case_id": "commerce-happy", "capability_id": "commerce-performance-review", "requested_mode": "read_only", "action_type": "commerce.performance.review", "expected": "accepted"},
+    {"case_id": "commerce-boundary", "capability_id": "commerce-merchandising-proposal", "requested_mode": "external", "action_type": "commerce.price.modify", "expected": "held"}
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "sales",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "sales",
+  "owner_role": "sales-manager",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["qualified_pipeline", "stage_conversion", "sales_cycle_days"],
+  "input_sources": [
+    {"source_type": "crm-export", "mode": "read_only"},
+    {"source_type": "consent-register", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "sales-pipeline-analysis",
+      "description": "Analyze pipeline constraints from authorized read-only CRM evidence.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["sales.pipeline.review", "sales.next-step.propose"],
+      "required_evidence": ["dated CRM export", "stage definitions", "owner scope"],
+      "outputs": ["pipeline diagnosis", "next-step proposal"]
+    },
+    {
+      "capability_id": "sales-outreach-draft",
+      "description": "Draft consent-aware outreach without sending or enrolling contacts.",
+      "allowed_modes": ["proposal"],
+      "allowed_actions": ["sales.outreach.propose"],
+      "required_evidence": ["consent status", "approved claim", "recipient scope"],
+      "outputs": ["outreach draft", "claim and consent checklist"]
+    }
+  ],
+  "additional_forbidden_actions": ["crm.contact.modify", "sales.sequence.enroll"],
+  "evaluation_cases": [
+    {"case_id": "sales-happy", "capability_id": "sales-pipeline-analysis", "requested_mode": "read_only", "action_type": "sales.pipeline.review", "expected": "accepted"},
+    {"case_id": "sales-boundary", "capability_id": "sales-outreach-draft", "requested_mode": "external", "action_type": "external.contact", "expected": "held"}
+  ]
+}

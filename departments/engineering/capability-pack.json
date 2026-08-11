@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "engineering",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "engineering",
+  "owner_role": "software-engineer",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["change_failure_rate", "defect_escape_rate", "lead_time"],
+  "input_sources": [
+    {"source_type": "repository-snapshot", "mode": "read_only"},
+    {"source_type": "test-result", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "engineering-change-proposal",
+      "description": "Design and simulate a scoped code change without production deployment.",
+      "allowed_modes": ["proposal", "simulated"],
+      "allowed_actions": ["engineering.change.propose", "engineering.test.simulate"],
+      "required_evidence": ["repository state", "requirement", "test baseline"],
+      "outputs": ["change proposal", "simulated test result"]
+    },
+    {
+      "capability_id": "engineering-incident-review",
+      "description": "Analyze incident evidence and propose remediation without changing production.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["engineering.incident.review", "engineering.remediation.propose"],
+      "required_evidence": ["incident timeline", "logs", "deployment identity"],
+      "outputs": ["causal analysis", "remediation proposal"]
+    }
+  ],
+  "additional_forbidden_actions": ["engineering.deploy", "repository.merge"],
+  "evaluation_cases": [
+    {"case_id": "engineering-happy", "capability_id": "engineering-change-proposal", "requested_mode": "simulated", "action_type": "engineering.test.simulate", "expected": "accepted"},
+    {"case_id": "engineering-boundary", "capability_id": "engineering-change-proposal", "requested_mode": "external", "action_type": "production.write", "expected": "held"}
+  ]
+}

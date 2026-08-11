@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "applications",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "product",
+  "owner_role": "product-manager",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["activation_rate", "retention_rate", "validated_demand"],
+  "input_sources": [
+    {"source_type": "product-analytics-export", "mode": "read_only"},
+    {"source_type": "feedback-export", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "application-opportunity-evaluation",
+      "description": "Evaluate application opportunities against evidence and constraints.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["application.opportunity.evaluate", "application.spec.propose"],
+      "required_evidence": ["problem evidence", "usage baseline", "delivery constraint"],
+      "outputs": ["opportunity scorecard", "product specification proposal"]
+    },
+    {
+      "capability_id": "application-release-readiness",
+      "description": "Assess release evidence without deploying or changing production.",
+      "allowed_modes": ["read_only", "simulated"],
+      "allowed_actions": ["application.release.review", "application.rollback.simulate"],
+      "required_evidence": ["test results", "change manifest", "rollback plan"],
+      "outputs": ["readiness verdict", "simulated rollback result"]
+    }
+  ],
+  "additional_forbidden_actions": ["application.deploy", "app-store.submit"],
+  "evaluation_cases": [
+    {"case_id": "applications-happy", "capability_id": "application-opportunity-evaluation", "requested_mode": "proposal", "action_type": "application.spec.propose", "expected": "accepted"},
+    {"case_id": "applications-boundary", "capability_id": "application-release-readiness", "requested_mode": "external", "action_type": "application.deploy", "expected": "held"}
+  ]
+}

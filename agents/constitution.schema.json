@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agent-os.local/schemas/agent-constitution-v1.json",
+  "title": "Agent OS Role Constitution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "constitution_id",
+    "version",
+    "role_name",
+    "layer",
+    "reports_to",
+    "mission",
+    "accountabilities",
+    "capabilities",
+    "inputs",
+    "outputs",
+    "autonomy",
+    "tool_policy",
+    "decision_rights",
+    "prohibited_actions",
+    "startup_checks",
+    "operating_loop",
+    "handoff_targets",
+    "escalation_triggers",
+    "success_metrics",
+    "model_requirements",
+    "memory_policy",
+    "evaluation_scenarios"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "constitution_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+    "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "role_name": {"type": "string", "minLength": 3},
+    "layer": {
+      "enum": ["portfolio", "business", "department", "specialist", "assurance", "platform"]
+    },
+    "reports_to": {"type": ["string", "null"]},
+    "mission": {"type": "string", "minLength": 20},
+    "accountabilities": {"$ref": "#/$defs/nonEmptyStrings"},
+    "capabilities": {"$ref": "#/$defs/nonEmptyStrings"},
+    "inputs": {"$ref": "#/$defs/nonEmptyStrings"},
+    "outputs": {"$ref": "#/$defs/nonEmptyStrings"},
+    "autonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "work_discovery",
+        "may_delegate",
+        "may_execute",
+        "may_verify_own_work",
+        "external_action_default"
+      ],
+      "properties": {
+        "work_discovery": {"type": "boolean"},
+        "may_delegate": {"type": "boolean"},
+        "may_execute": {"type": "boolean"},
+        "may_verify_own_work": {"const": false},
+        "external_action_default": {"const": "policy-engine-required"}
+      }
+    },
+    "tool_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requestable", "forbidden", "runtime_allowlist_required"],
+      "properties": {
+        "requestable": {"$ref": "#/$defs/nonEmptyStrings"},
+        "forbidden": {"$ref": "#/$defs/nonEmptyStrings"},
+        "runtime_allowlist_required": {"const": true}
+      }
+    },
+    "decision_rights": {"$ref": "#/$defs/nonEmptyStrings"},
+    "prohibited_actions": {"$ref": "#/$defs/nonEmptyStrings"},
+    "startup_checks": {"$ref": "#/$defs/nonEmptyStrings"},
+    "operating_loop": {"$ref": "#/$defs/nonEmptyStrings"},
+    "handoff_targets": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9-]+$"},
+      "uniqueItems": true
+    },
+    "escalation_triggers": {"$ref": "#/$defs/nonEmptyStrings"},
+    "success_metrics": {"$ref": "#/$defs/nonEmptyStrings"},
+    "model_requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reasoning_tier",
+        "tool_use",
+        "structured_output",
+        "modalities",
+        "context_class",
+        "data_classes",
+        "independent_evaluator"
+      ],
+      "properties": {
+        "reasoning_tier": {"enum": ["utility", "standard", "advanced"]},
+        "tool_use": {"type": "boolean"},
+        "structured_output": {"type": "boolean"},
+        "modalities": {
+          "type": "array",
+          "items": {"enum": ["text", "code", "vision", "image", "audio", "video"]},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "context_class": {"enum": ["small", "medium", "large"]},
+        "data_classes": {
+          "type": "array",
+          "items": {"enum": ["public", "internal", "confidential", "restricted-financial"]},
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "independent_evaluator": {"type": "boolean"}
+      }
+    },
+    "memory_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read_scopes", "may_propose_candidates", "may_promote"],
+      "properties": {
+        "read_scopes": {"$ref": "#/$defs/nonEmptyStrings"},
+        "may_propose_candidates": {"type": "boolean"},
+        "may_promote": {"const": false}
+      }
+    },
+    "evaluation_scenarios": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9-]+\\.(happy|boundary)$"},
+      "minItems": 2,
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "nonEmptyStrings": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}

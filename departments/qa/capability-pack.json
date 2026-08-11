@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "pack_id": "qa",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "qa",
+  "owner_role": "qa-verifier",
+  "verifier_role": "platform-reliability",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["escaped_defects", "false_completion_rate", "verification_reproducibility"],
+  "input_sources": [
+    {"source_type": "acceptance-artifact", "mode": "read_only"},
+    {"source_type": "independent-readback", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "qa-independent-verification",
+      "description": "Reproduce a claim against immutable criteria and independent evidence.",
+      "allowed_modes": ["read_only", "simulated"],
+      "allowed_actions": ["qa.claim.verify", "qa.regression.simulate"],
+      "required_evidence": ["producer identity", "acceptance criteria", "independent evidence"],
+      "outputs": ["reproducible verdict", "defect report"]
+    }
+  ],
+  "additional_forbidden_actions": ["qa.criteria.relax", "qa.reviewed-artifact.repair"],
+  "evaluation_cases": [
+    {"case_id": "qa-happy", "capability_id": "qa-independent-verification", "requested_mode": "read_only", "action_type": "qa.claim.verify", "expected": "accepted"},
+    {"case_id": "qa-boundary", "capability_id": "qa-independent-verification", "requested_mode": "external", "action_type": "qa.reviewed-artifact.repair", "expected": "held"}
+  ]
+}

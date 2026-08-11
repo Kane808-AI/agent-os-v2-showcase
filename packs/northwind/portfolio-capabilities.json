@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "accepted-not-activated",
+  "policy_version": "1.0.0",
+  "business_capability_packs": {
+    "services": [
+      "digital-marketing-consulting",
+      "sales",
+      "operations",
+      "customer-success",
+      "research",
+      "engineering",
+      "qa",
+      "finance",
+      "accounting"
+    ],
+    "commerce": [
+      "commerce",
+      "digital-marketing-consulting",
+      "operations",
+      "research",
+      "engineering",
+      "qa",
+      "finance",
+      "accounting"
+    ],
+    "media": [
+      "youtube",
+      "digital-marketing-consulting",
+      "operations",
+      "research",
+      "engineering",
+      "qa",
+      "finance",
+      "accounting"
+    ],
+    "ventures": [
+      "applications",
+      "physical-products",
+      "commerce",
+      "digital-marketing-consulting",
+      "operations",
+      "customer-success",
+      "research",
+      "engineering",
+      "qa",
+      "finance",
+      "accounting"
+    ]
+  },
+  "activation_requirements": [
+    "Create exact tenant and business identities",
+    "Bind scoped actors and least-privilege read-only data sources",
+    "Record deterministic pack acceptance for the exact version and hash",
+    "Configure current authority, emergency stop, and independent QA",
+    "Keep all outputs read-only, proposed, or simulated until Goal 14 acceptance"
+  ],
+  "external_side_effects_enabled": false
+}

@@ -1,0 +1,10 @@
+project_id                  = "agent-os-v2-pilot-REPLACE"
+region                      = "us-west1"
+tenant_id                   = "REPLACE"
+business_id                 = "REPLACE"
+deploy_runtime              = false
+# Set these only for the separately reviewed runtime plan after foundation apply.
+# runtime_image               = "us-west1-docker.pkg.dev/agent-os-v2-pilot-REPLACE/agent-os-v2-pilot/runtime@sha256:REPLACE_WITH_64_HEX"
+# runtime_dsn_secret_version  = "1"
+# canary_input_secret_version = "1"
+# operator_invoker_members    = ["user:operator@example.com"]

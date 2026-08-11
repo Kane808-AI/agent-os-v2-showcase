@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-07-28T20:00:00-07:00",
+  "source_system": "openclaw-legacy",
+  "sources": [
+    {
+      "source_path": "knowledge/etsy-shop-playbook.md",
+      "sha256": "c1d5581232ee1cf61cdc787883af52133a9fca08ba5f7a4b11a37e4ff2364df7",
+      "topic": "etsy",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "synthesize",
+      "reason": "Active digital-listing playbook; retain reusable QA, disclosure, lineage, and scale-after-validation controls while removing wrapper operations and volatile platform details."
+    },
+    {
+      "source_path": "knowledge/etsy-shop-playbook.md",
+      "sha256": "a2c7d9d8f58f5c21617a9bd12cbaf9e44b95f9ea75b103237d40f0d0d23bfaba",
+      "topic": "etsy",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "superseded",
+      "reason": "The source identifies itself as superseded and mixes physical-production language into digital listings."
+    },
+    {
+      "source_path": "knowledge/etsy-shop-kb.md",
+      "sha256": "a91f31311b5d2838af06b489a545a19989ea905f24def05b4527e27defe9acd7",
+      "topic": "etsy",
+      "sensitivity": "internal",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain strategy questions and testing principles as a research-only hypothesis; do not import marketplace observations as current facts."
+    },
+    {
+      "source_path": "knowledge/etsy-shop-revised-strategy.md",
+      "sha256": "911c99991d57e7ec9d72e25722edff7226389e626ee6108bf250f8d22f2fe7a4",
+      "topic": "etsy",
+      "sensitivity": "internal",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain experiment structure and demand-validation concepts, subject to current evidence and platform revalidation."
+    },
+    {
+      "source_path": "knowledge/etsy-shop-sage-review.md",
+      "sha256": "889c9fcb899522c28dd30396d5de1ef8648cbd419cbd8b397bd5f05093ddf9a8",
+      "topic": "etsy",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "evidence-only",
+      "reason": "Useful as historical critique and counterevidence, not as an operating procedure."
+    },
+    {
+      "source_path": "projects/etsy-shop/etsy-heartbeat-sop.md",
+      "sha256": "551e1035fd76e75998ce8bb109f5339f186d1e930d6ed6761102d1c1ac295ff1",
+      "topic": "etsy",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "exclude-wrapper-specific",
+      "reason": "The procedure is coupled to legacy agents, paths, browser state, and heartbeat behavior."
+    },
+    {
+      "source_path": "knowledge/marketing/tiktok-playbook.md",
+      "sha256": "5c2e1300b3cfd3cfe12fd9d77bc012ecff91e84069d2d49849a61fd318b0c452",
+      "topic": "tiktok",
+      "sensitivity": "internal",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain test design and measurement principles as candidate strategy; revalidate current formats, policies, and benchmarks."
+    },
+    {
+      "source_path": "knowledge/tiktok/tiktok-ads-addendum.md",
+      "sha256": "86372e26507b813d3aedabde96e2e8f52e6999af6faae894cdaf7d944df49ae1",
+      "topic": "tiktok",
+      "sensitivity": "internal",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain bounded paid-test and downstream-outcome principles, excluding specific budgets, benchmarks, features, and policy claims."
+    },
+    {
+      "source_path": "knowledge/TIKTOK_WORKFLOW.md",
+      "sha256": "4e6a5584800cadd12a362d07024cb3f43800f5d3c580b0ae3eb80aae61686088",
+      "topic": "tiktok",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "exclude-wrapper-specific",
+      "reason": "The workflow is an OpenClaw routing and scheduling artifact rather than portable business knowledge."
+    },
+    {
+      "source_path": "projects/tiktok-shop/tiktok-shop-playbook.md",
+      "sha256": "c6295a8c5cef746ca64b990308b5b5c2e2062235f0a408425c041039a6672733",
+      "topic": "tiktok-commerce",
+      "sensitivity": "internal",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain launch risk gates and unit-economics checks, excluding fees, service levels, vendor claims, and account assumptions."
+    },
+    {
+      "source_path": "memory/ghl/README.md",
+      "sha256": "42c62d66b648bfea8c49367afca53c000ad3ee077059642d40ca2ce79796d527",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "evidence-only",
+      "reason": "Legacy index used to establish source coverage; it contains no independently approved procedure."
+    },
+    {
+      "source_path": "memory/ghl/ghl-overview.md",
+      "sha256": "be624536dedf49fa5ecf6a4e6eb02f9c7efa11f016951360d7766a8659fb8671",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain generic entity-isolation and CRM taxonomy; strip client identity, account state, endpoint, and rate-limit claims."
+    },
+    {
+      "source_path": "memory/ghl/ghl-api-reference.md",
+      "sha256": "d49cf16add0b0c39facf144ebd06a043d4a2b257e939b0f89da35406cb016be5",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "internal",
+      "volatility": "volatile",
+      "decision": "reference-only-needs-refresh",
+      "reason": "Endpoints, versions, scopes, and rate limits require verification against current official documentation."
+    },
+    {
+      "source_path": "memory/ghl/ghl-pipelines-crm.md",
+      "sha256": "41d37cfccb5d46206df08c9b897e3c60855500ea2be1e91b19d3aa7e9e8ae89e",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "periodic",
+      "decision": "synthesize",
+      "reason": "Retain deduplication, consent, live-ID resolution, isolation, and readback controls; remove examples and client data."
+    },
+    {
+      "source_path": "memory/ghl/ghl-workflows.md",
+      "sha256": "a57e3662ed8d311192d51e5d0abe0b8fe1ad1afd24b333e0b14d30b2d71c45f4",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "periodic",
+      "decision": "synthesize",
+      "reason": "Retain workflow safety checks and staged verification, without client-specific examples or claims about live workflow state."
+    },
+    {
+      "source_path": "memory/ghl/ghl-webhooks-n8n.md",
+      "sha256": "7f5d4e2b48d637660d7c438883326c38b3731ad22a6fa6bb9108d91076cdaa24",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "synthesize",
+      "reason": "Retain generic authentication, idempotency, replay, backoff, and failure-observability controls; revalidate current integration behavior."
+    },
+    {
+      "source_path": "memory/ghl/ghl-email.md",
+      "sha256": "fb617421b1d470ee261fc5fad8f64e6433b5199fefddb8e133f19ef21b9b7ffa",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "hold-for-live-verification",
+      "reason": "Deliverability, provider, consent, and compliance behavior is current-state and potentially high-impact."
+    },
+    {
+      "source_path": "memory/ghl/ghl-sms-voice.md",
+      "sha256": "315a1ba3e7c426fce9bbf5e5483e1b7a001b51fe1089ca7fdcc182650e01811e",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "hold-for-live-verification",
+      "reason": "Messaging registration, consent, legal, carrier, and account requirements must be revalidated before use."
+    },
+    {
+      "source_path": "memory/ghl/ghl-reporting-snapshots.md",
+      "sha256": "a9d6d775522676f66e387019cf154e9ec9f30bee07fbe32fc4ddefb7a8f00caa",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "reference-only-needs-refresh",
+      "reason": "Historical reporting shapes may inform future research but cannot represent current live account state."
+    },
+    {
+      "source_path": "projects/northwind/demo-outreach-ghl-build-spec.md",
+      "sha256": "c02cf44025d1ffcd94ceb5babab68abe1be1b0679a6c2577df1f76ec60166cec",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "hold-for-live-verification",
+      "reason": "The build specification contains current UI, offer, workflow, and account assumptions that must be checked in the live tenant."
+    },
+    {
+      "source_path": "projects/northwind/ghl-inbound-build-plan.md",
+      "sha256": "0f03065a0b924f46cc2452217bdc679f38f52369c767059b1588daa8cea14005",
+      "topic": "ghl-whitelabel",
+      "sensitivity": "restricted",
+      "volatility": "volatile",
+      "decision": "exclude-sensitive",
+      "reason": "Contains live account identifiers, communication destinations, infrastructure details, and operational configuration."
+    },
+    {
+      "source_path": "projects/legacy-affiliate/pinterest-strategy-audit-2026-07-14.md",
+      "sha256": "87b1417e89dc0a677005f3a46e350f06c771464caba0f4aec1207ad70e4f0352",
+      "topic": "pinterest-affiliate",
+      "sensitivity": "confidential",
+      "volatility": "periodic",
+      "decision": "synthesize",
+      "reason": "Retain the incident lesson that scheduled activity is not verified delivery and that strategy evaluation requires a functioning measured pipeline."
+    },
+    {
+      "source_path": "knowledge/marketing/gadget-pinterest-pin-spec.md",
+      "sha256": "9ccadc6d83e2b079f3ce67f2c74c0b9a81351bd80140f3dd9f837f780d2046d0",
+      "topic": "pinterest-affiliate",
+      "sensitivity": "internal",
+      "volatility": "periodic",
+      "decision": "synthesize",
+      "reason": "Retain product-asset-destination integrity and truthful creative checks while excluding account-specific configuration."
+    },
+    {
+      "source_path": "projects/legacy-affiliate/pinterest-daily-affiliate-ops.md",
+      "sha256": "6b5eeabfebee9a2b6957df71c0e8d366728a05de533f04988d4b28d048ffa668",
+      "topic": "pinterest-affiliate",
+      "sensitivity": "confidential",
+      "volatility": "volatile",
+      "decision": "exclude-wrapper-specific",
+      "reason": "The daily procedure embeds legacy scheduling, paths, account details, and runtime assumptions."
+    }
+  ]
+}

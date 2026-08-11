@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "pilot_id": "northwind-affiliate-shadow-v1",
+  "status": "shadow-only",
+  "business_key": "commerce",
+  "objective_metric": "affiliate_sales",
+  "mode": "historical_replay",
+  "producer_constitution": "commerce-operator",
+  "verifier_constitution": "qa-verifier",
+  "offer_evaluator_version": "affiliate-offer-v1",
+  "maximum_offer_age_days": 30,
+  "minimum_evidence_confidence_bps": 7000,
+  "minimum_audience_fit_score": 6000,
+  "content_output_schema": {
+    "type": "object",
+    "properties": {
+      "body": {"type": "string", "minLength": 1},
+      "call_to_action": {"type": "string", "minLength": 1},
+      "channel": {"type": "string", "minLength": 1},
+      "claims": {"type": "array", "items": {"type": "string"}, "maxItems": 10},
+      "destination_url": {"type": "string", "minLength": 8},
+      "disclosure": {"type": "string", "minLength": 1},
+      "headline": {"type": "string", "minLength": 1}
+    },
+    "required": ["body", "call_to_action", "channel", "claims", "destination_url", "disclosure", "headline"],
+    "additionalProperties": false
+  },
+  "forbidden_side_effects": [
+    "external.publish",
+    "affiliate.link.modify",
+    "partner.contact",
+    "ads.spend.execute",
+    "payout.modify"
+  ]
+}

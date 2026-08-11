@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:agent-os:tenant-package:v1",
+  "title": "Agent OS isolated tenant package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tenant_id",
+    "business_id",
+    "release_version",
+    "image_digest",
+    "database_adapter",
+    "runtime_database_role_ref",
+    "migration_database_role_ref",
+    "backup_database_role_ref",
+    "secret_provider",
+    "attestation_provider",
+    "attestation_key_ref",
+    "dashboard_origin",
+    "dashboard_auth",
+    "tls_required",
+    "telemetry_mode",
+    "external_side_effects_enabled"
+  ],
+  "properties": {
+    "tenant_id": {"type": "string", "minLength": 1},
+    "business_id": {"type": "string", "minLength": 1},
+    "release_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[a-z0-9.]+)?$"},
+    "image_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "database_adapter": {"const": "postgresql"},
+    "runtime_database_role_ref": {"type": "string", "pattern": "^secretref://"},
+    "migration_database_role_ref": {"type": "string", "pattern": "^secretref://"},
+    "backup_database_role_ref": {"type": "string", "pattern": "^secretref://"},
+    "secret_provider": {"enum": ["aws-secrets-manager", "azure-key-vault", "gcp-secret-manager", "vault"]},
+    "attestation_provider": {"const": "external-kms"},
+    "attestation_key_ref": {"type": "string", "pattern": "^secretref://"},
+    "dashboard_origin": {"type": "string", "pattern": "^https://"},
+    "dashboard_auth": {"enum": ["oidc", "saml"]},
+    "tls_required": {"const": true},
+    "telemetry_mode": {"const": "metadata-only"},
+    "external_side_effects_enabled": {"const": false}
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "mode": "read_only",
+  "tenant_id": "replace-with-tenant-id",
+  "business_id": "replace-with-business-id",
+  "producer_id": "replace-with-operations-actor",
+  "verifier_id": "replace-with-independent-qa-actor",
+  "offer_key": "amazon-example-offer",
+  "source_ref": "replace-with-immutable-export-id",
+  "window_start": "2026-07-01T00:00:00+00:00",
+  "window_end": "2026-07-30T00:00:00+00:00",
+  "observed_at": "2026-07-30T01:00:00+00:00",
+  "pinterest": {
+    "impressions": 0,
+    "engagements": 0,
+    "content_clicks": 0,
+    "outbound_clicks": 0
+  },
+  "amazon": {
+    "conversions": 0,
+    "gross_revenue_minor": 0,
+    "commission_minor": 0
+  }
+}

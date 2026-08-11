@@ -1,0 +1,568 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-01",
+  "allowed_statuses": [
+    "captured",
+    "designed",
+    "implemented",
+    "verified",
+    "deferred",
+    "retired"
+  ],
+  "requirements": [
+    {
+      "id": "AOS-PLAT-001",
+      "goal": 1,
+      "title": "Business-agnostic platform boundary",
+      "status": "verified",
+      "evidence": ["docs/architecture/product-boundaries.md", "tests/test_contracts.py"]
+    },
+    {
+      "id": "AOS-TEN-001",
+      "goal": 2,
+      "title": "Tenant and business identity isolation",
+      "status": "verified",
+      "evidence": ["tests/test_contracts.py", "tests/test_runtime_slice.py"]
+    },
+    {
+      "id": "AOS-RUN-001",
+      "goal": 2,
+      "title": "Durable idempotent event processing",
+      "status": "verified",
+      "evidence": ["tests/test_runtime_slice.py"]
+    },
+    {
+      "id": "AOS-RUN-002",
+      "goal": 2,
+      "title": "Exact-replay-safe event fingerprints and single-owner processing leases",
+      "status": "verified",
+      "evidence": ["docs/architecture/foundation-hardening.md", "src/agent_os/runtime.py", "tests/test_runtime_slice.py"]
+    },
+    {
+      "id": "AOS-RUN-003",
+      "goal": 2,
+      "title": "Actor- and capability-aware authority with deny-overrides",
+      "status": "verified",
+      "evidence": ["src/agent_os/contracts.py", "src/agent_os/storage.py", "tests/test_contracts.py"]
+    },
+    {
+      "id": "AOS-RUN-004",
+      "goal": 2,
+      "title": "Persisted event identity is append-only and child processing state must match event scope",
+      "status": "verified",
+      "evidence": ["docs/decisions/0009-append-only-truth-and-schema-attestation.md", "src/agent_os/storage.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-AUTO-001",
+      "goal": 3,
+      "title": "Objective-driven autonomous work discovery",
+      "status": "verified",
+      "evidence": ["tests/test_autonomous_loop.py"]
+    },
+    {
+      "id": "AOS-AUTO-002",
+      "goal": 3,
+      "title": "Restart-safe leases and bounded retries",
+      "status": "verified",
+      "evidence": ["tests/test_autonomous_loop.py"]
+    },
+    {
+      "id": "AOS-INT-001",
+      "goal": 4,
+      "title": "Evidence-backed structured planning",
+      "status": "verified",
+      "evidence": ["tests/test_intelligence.py"]
+    },
+    {
+      "id": "AOS-INT-002",
+      "goal": 4,
+      "title": "Accepted-plan materialization revalidates hashes, scope, capability, authority, work, and memory",
+      "status": "verified",
+      "evidence": ["src/agent_os/storage.py", "tests/test_intelligence.py"]
+    },
+    {
+      "id": "AOS-INT-003",
+      "goal": 4,
+      "title": "Materialization recomputes durable plan and evaluation hashes and current authority atomically",
+      "status": "verified",
+      "evidence": ["docs/architecture/foundation-hardening.md", "src/agent_os/storage.py", "tests/test_intelligence.py"]
+    },
+    {
+      "id": "AOS-INT-004",
+      "goal": 4,
+      "title": "Authority revalidation and plan materialization commit in one serializable write boundary",
+      "status": "verified",
+      "evidence": ["docs/decisions/0010-authenticate-truth-and-serialize-critical-writes.md", "src/agent_os/storage.py", "tests/test_intelligence.py"]
+    },
+    {
+      "id": "AOS-LEARN-001",
+      "goal": 4,
+      "title": "Learning through gated candidate memory",
+      "status": "verified",
+      "evidence": ["docs/architecture/autonomy-and-learning.md", "tests/test_intelligence.py"]
+    },
+    {
+      "id": "AOS-CTRL-001",
+      "goal": 5,
+      "title": "Authoritative versioned build plan and requirements registry",
+      "status": "verified",
+      "evidence": ["docs/BUILD_PLAN.md", "docs/requirements/registry.json"]
+    },
+    {
+      "id": "AOS-CTRL-002",
+      "goal": 5,
+      "title": "Append-only database schema migration ledger",
+      "status": "verified",
+      "evidence": ["src/agent_os/storage.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-REC-001",
+      "goal": 5,
+      "title": "Integrity-checked state backup and recovery procedure",
+      "status": "verified",
+      "evidence": ["docs/operations/recovery.md", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-REC-002",
+      "goal": 5,
+      "title": "Read-only diagnostics and backup-first explicit migration",
+      "status": "verified",
+      "evidence": ["docs/operations/recovery.md", "src/agent_os/cli.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-REC-003",
+      "goal": 5,
+      "title": "Database and external truth-key backups are captured, published, and verified as one recovery pair",
+      "status": "verified",
+      "evidence": ["docs/decisions/0011-bind-completion-semantics-and-publish-paired-backups.md", "docs/operations/recovery.md", "src/agent_os/storage.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-CTRL-003",
+      "goal": 5,
+      "title": "Unledgered database refusal and database-enforced tenant/business ownership",
+      "status": "verified",
+      "evidence": ["docs/architecture/foundation-hardening.md", "src/agent_os/storage.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-CTRL-004",
+      "goal": 5,
+      "title": "Actual-schema attestation, exact parent scope, and migration exclusively through backup-first control",
+      "status": "verified",
+      "evidence": ["docs/decisions/0009-append-only-truth-and-schema-attestation.md", "docs/operations/recovery.md", "src/agent_os/storage.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-CTRL-005",
+      "goal": 5,
+      "title": "Parent scope and backup-first migration remain consistent under concurrent or parent-side mutation",
+      "status": "verified",
+      "evidence": ["docs/decisions/0010-authenticate-truth-and-serialize-critical-writes.md", "docs/decisions/0011-bind-completion-semantics-and-publish-paired-backups.md", "src/agent_os/storage.py", "tests/test_control_recovery.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-AGENT-001",
+      "goal": 6,
+      "title": "Complete versioned agent constitutions and role contracts",
+      "status": "verified",
+      "evidence": ["agents/AGENTS.md", "agents/registry.json", "agents/roles", "tests/test_agent_constitutions.py"]
+    },
+    {
+      "id": "AOS-AGENT-002",
+      "goal": 6,
+      "title": "Runtime-validated authority, tool, memory, handoff, and model-capability declarations",
+      "status": "verified",
+      "evidence": ["agents/constitution.schema.json", "src/agent_os/agents.py", "tests/test_agent_constitutions.py"]
+    },
+    {
+      "id": "AOS-AGENT-003",
+      "goal": 6,
+      "title": "Happy-path and boundary evaluation fixtures for every role",
+      "status": "verified",
+      "evidence": ["agents/evals/scenarios.json", "tests/test_agent_constitutions.py"]
+    },
+    {
+      "id": "AOS-AGENT-004",
+      "goal": 6,
+      "title": "Inert tenant assignment manifest separated from reusable product roles",
+      "status": "verified",
+      "evidence": ["packs/northwind/agent-assignments.json", "src/agent_os/agents.py", "tests/test_agent_constitutions.py"]
+    },
+    {
+      "id": "AOS-KNOW-001",
+      "goal": 7,
+      "title": "Governed knowledge with provenance, freshness, and conflict handling",
+      "status": "verified",
+      "evidence": ["docs/architecture/knowledge-governance.md", "src/agent_os/knowledge.py", "tests/test_knowledge_governance.py"]
+    },
+    {
+      "id": "AOS-KNOW-002",
+      "goal": 7,
+      "title": "Selective migration of Etsy, TikTok, GHL/Whitelabel, and business knowledge",
+      "status": "verified",
+      "evidence": ["migrations/knowledge-source-inventory.json", "knowledge/catalog.json", "knowledge/northwind", "tests/test_knowledge_governance.py"]
+    },
+    {
+      "id": "AOS-KNOW-003",
+      "goal": 7,
+      "title": "Purpose-scoped retrieval blocks stale, conflicted, and unpromoted knowledge",
+      "status": "verified",
+      "evidence": ["src/agent_os/knowledge.py", "tests/test_knowledge_governance.py"]
+    },
+    {
+      "id": "AOS-KNOW-004",
+      "goal": 7,
+      "title": "Obsidian remains an optional interface rather than canonical memory infrastructure",
+      "status": "verified",
+      "evidence": ["docs/architecture/memory.md", "docs/architecture/knowledge-governance.md", "knowledge/README.md"]
+    },
+    {
+      "id": "AOS-KNOW-005",
+      "goal": 7,
+      "title": "Operational knowledge purpose requires compatible kind and promotion state",
+      "status": "verified",
+      "evidence": ["src/agent_os/knowledge.py", "tests/test_knowledge_governance.py"]
+    },
+    {
+      "id": "AOS-VERIFY-001",
+      "goal": 8,
+      "title": "Evidence receipts and independent outcome verification",
+      "status": "verified",
+      "evidence": ["docs/architecture/execution-truth.md", "src/agent_os/verification.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-002",
+      "goal": 8,
+      "title": "Fresh preconditions and post-execution read-back evidence",
+      "status": "verified",
+      "evidence": ["src/agent_os/verification.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-003",
+      "goal": 8,
+      "title": "No completion claim from simulation, attempt, narration, or self-verification",
+      "status": "verified",
+      "evidence": ["docs/decisions/0007-separate-execution-from-verification.md", "src/agent_os/storage.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-004",
+      "goal": 8,
+      "title": "Deep verification requires registered latest evidence for the exact attempted target",
+      "status": "verified",
+      "evidence": ["docs/architecture/foundation-hardening.md", "src/agent_os/storage.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-005",
+      "goal": 8,
+      "title": "Unobserved external attempts enter bounded read-only reconciliation",
+      "status": "verified",
+      "evidence": ["src/agent_os/verification.py", "src/agent_os/storage.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-006",
+      "goal": 8,
+      "title": "Verified completion evidence and decisions remain append-only after commitment",
+      "status": "verified",
+      "evidence": ["docs/architecture/foundation-hardening.md", "src/agent_os/storage.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-007",
+      "goal": 8,
+      "title": "Completion truth is authenticated by an external key and unsigned terminal entry cannot support a claim",
+      "status": "verified",
+      "evidence": ["docs/decisions/0010-authenticate-truth-and-serialize-critical-writes.md", "docs/decisions/0011-bind-completion-semantics-and-publish-paired-backups.md", "src/agent_os/storage.py", "src/agent_os/verification.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-VERIFY-008",
+      "goal": 8,
+      "title": "Completion signatures bind canonical work semantics and objective/work scope, and terminal inserts require attestations",
+      "status": "verified",
+      "evidence": ["docs/decisions/0011-bind-completion-semantics-and-publish-paired-backups.md", "docs/reviews/goal-8-alpha-11-bounded-acceptance.md", "src/agent_os/storage.py", "src/agent_os/verification.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-RISK-001",
+      "goal": 9,
+      "title": "Deterministic approval and risk policy",
+      "status": "verified",
+      "evidence": ["src/agent_os/contracts.py", "src/agent_os/storage.py", "tests/test_contracts.py", "tests/test_autonomous_loop.py"]
+    },
+    {
+      "id": "AOS-RISK-002",
+      "goal": 9,
+      "title": "Durable approval lifecycle with segregation, expiry, rejection, and revocation",
+      "status": "verified",
+      "evidence": ["docs/architecture/approval-and-risk-controls.md", "docs/decisions/0012-durable-approvals-and-emergency-stop.md", "src/agent_os/storage.py", "src/agent_os/autonomy.py", "tests/test_autonomous_loop.py"]
+    },
+    {
+      "id": "AOS-RISK-003",
+      "goal": 9,
+      "title": "Business-scoped emergency stop blocks new work and execution",
+      "status": "verified",
+      "evidence": ["docs/architecture/approval-and-risk-controls.md", "docs/decisions/0012-durable-approvals-and-emergency-stop.md", "src/agent_os/storage.py", "src/agent_os/runtime.py", "src/agent_os/autonomy.py", "tests/test_autonomous_loop.py", "tests/test_runtime_slice.py"]
+    },
+    {
+      "id": "AOS-FIN-001",
+      "goal": 9,
+      "title": "Finance and accounting with read-only default and segregation of duties",
+      "status": "verified",
+      "evidence": ["docs/architecture/finance-and-accounting.md", "departments/finance/README.md", "src/agent_os/contracts.py", "src/agent_os/storage.py", "tests/test_agent_constitutions.py", "tests/test_financial_controls.py"]
+    },
+    {
+      "id": "AOS-FIN-002",
+      "goal": 9,
+      "title": "Money movement and irreversible financial commitments remain globally forbidden",
+      "status": "verified",
+      "evidence": ["docs/architecture/finance-and-accounting.md", "docs/decisions/0013-forbid-external-financial-execution.md", "src/agent_os/contracts.py", "src/agent_os/storage.py", "tests/test_contracts.py", "tests/test_execution_verification.py"]
+    },
+    {
+      "id": "AOS-FIN-003",
+      "goal": 9,
+      "title": "Cumulative spend envelopes are enforced atomically before external spend",
+      "status": "verified",
+      "evidence": ["docs/architecture/finance-and-accounting.md", "docs/decisions/0014-commit-budget-before-external-spend.md", "docs/reviews/goal-9-alpha-14-completion.md", "src/agent_os/storage.py", "tests/test_financial_controls.py"]
+    },
+    {
+      "id": "AOS-LLM-001",
+      "goal": 10,
+      "title": "Capability-, policy-, health-, sensitivity-, and budget-aware LLM routing",
+      "status": "verified",
+      "evidence": ["docs/BUILD_PLAN.md", "docs/architecture/model-routing.md", "docs/decisions/0015-govern-model-routing.md", "src/agent_os/routing.py", "src/agent_os/storage.py", "tests/test_model_routing.py"]
+    },
+    {
+      "id": "AOS-LLM-002",
+      "goal": 10,
+      "title": "Compatible explicit fallbacks with no silent downgrade",
+      "status": "verified",
+      "evidence": ["docs/architecture/model-routing.md", "docs/decisions/0015-govern-model-routing.md", "src/agent_os/routing.py", "migrations/model-routing-incidents.json", "tests/test_model_routing.py"]
+    },
+    {
+      "id": "AOS-LLM-003",
+      "goal": 10,
+      "title": "Versioned model catalog, routing decisions, cost telemetry, and circuit breakers",
+      "status": "verified",
+      "evidence": ["docs/architecture/model-routing.md", "docs/decisions/0015-govern-model-routing.md", "docs/reviews/goal-10-alpha-15-completion.md", "src/agent_os/routing.py", "src/agent_os/storage.py", "src/agent_os/dashboard.py", "migrations/model-routing-incidents.json", "tests/test_model_routing.py", "tests/test_control_recovery.py"]
+    },
+    {
+      "id": "AOS-MODEL-001",
+      "goal": 11,
+      "title": "Real-model shadow execution through isolated provider adapters",
+      "status": "verified",
+      "evidence": [
+        "docs/architecture/model-shadow-runtime.md",
+        "docs/decisions/0016-isolate-real-model-shadow-calls.md",
+        "docs/reviews/goal-11-alpha-16-completion.md",
+        "src/agent_os/shadow_runtime.py",
+        "src/agent_os/storage.py",
+        "tests/test_shadow_runtime.py",
+        "tests/test_control_recovery.py"
+      ]
+    },
+    {
+      "id": "AOS-B75-001",
+      "goal": 12,
+      "title": "Affiliate-marketing-first autonomous shadow reference loop",
+      "status": "verified",
+      "evidence": [
+        "docs/BUILD_PLAN.md",
+        "docs/architecture/affiliate-shadow-loop.md",
+        "docs/decisions/0017-bound-affiliate-pilot-to-historical-shadow-replay.md",
+        "docs/reviews/goal-12-alpha-17-completion.md",
+        "packs/northwind/README.md",
+        "packs/northwind/affiliate-shadow-pilot.json",
+        "src/agent_os/affiliate.py",
+        "src/agent_os/storage.py",
+        "tests/test_affiliate_shadow.py"
+      ]
+    },
+    {
+      "id": "AOS-PORT-001",
+      "goal": 13,
+      "title": "Capability packs for all active businesses and revenue streams",
+      "status": "verified",
+      "evidence": [
+        "departments/capability-pack-policy.json",
+        "departments/README.md",
+        "docs/architecture/portfolio-capabilities.md",
+        "docs/decisions/0018-accept-portfolio-packs-behind-a-common-shadow-boundary.md",
+        "docs/reviews/goal-13-alpha-18-completion.md",
+        "packs/northwind/portfolio-capabilities.json",
+        "src/agent_os/portfolio.py",
+        "src/agent_os/storage.py",
+        "tests/test_portfolio_expansion.py"
+      ]
+    },
+    {
+      "id": "AOS-COMMS-001",
+      "goal": 13,
+      "title": "Dashboard-first communication with replaceable Slack, Telegram, Discord, Teams, and email adapters",
+      "status": "verified",
+      "evidence": [
+        "docs/architecture/overview.md",
+        "docs/architecture/portfolio-capabilities.md",
+        "src/agent_os/communications.py",
+        "tests/test_portfolio_expansion.py"
+      ]
+    },
+    {
+      "id": "AOS-COMMS-002",
+      "goal": 13,
+      "title": "Unauthenticated dashboard is technically restricted to loopback",
+      "status": "verified",
+      "evidence": ["src/agent_os/dashboard.py", "tests/test_runtime_slice.py"]
+    },
+    {
+      "id": "AOS-PROD-001",
+      "goal": 14,
+      "title": "Resellable tenant packaging, onboarding, observability, and upgrades",
+      "status": "verified",
+      "evidence": [
+        "deployment/production-qualification-policy.json",
+        "deployment/tenant-package.schema.json",
+        "docs/architecture/production-hardening.md",
+        "docs/operations/production-deployment.md",
+        "src/agent_os/production.py",
+        "src/agent_os/storage.py",
+        "tests/test_production_hardening.py"
+      ]
+    },
+    {
+      "id": "AOS-PROD-002",
+      "goal": 14,
+      "title": "Hostile-administrator containment, crash-consistent persistence, fuzzing, and production backup qualification",
+      "status": "verified",
+      "evidence": [
+        "docs/reviews/goal-8-alpha-11-bounded-acceptance.md",
+        "docs/architecture/production-hardening.md",
+        "docs/operations/production-recovery.md",
+        "docs/decisions/0019-qualify-production-before-activation.md",
+        "src/agent_os/production.py",
+        "src/agent_os/storage.py",
+        "tests/test_production_hardening.py"
+      ]
+    },
+    {
+      "id": "AOS-MIG-001",
+      "goal": 14,
+      "title": "Capability-by-capability legacy cutover with rollback",
+      "status": "verified",
+      "evidence": [
+        "migrations/README.md",
+        "migrations/legacy-systems.json",
+        "docs/architecture/production-hardening.md",
+        "docs/operations/production-deployment.md",
+        "src/agent_os/production.py",
+        "src/agent_os/storage.py",
+        "tests/test_production_hardening.py"
+      ]
+    },
+    {
+      "id": "AOS-PILOT-001",
+      "goal": 15,
+      "title": "Role-bound forced-RLS PostgreSQL persistence for the bounded production pilot",
+      "status": "verified",
+      "evidence": [
+        "deployment/postgresql/pilot-schema.sql",
+        "docs/architecture/production-pilot.md",
+        "docs/decisions/0020-bind-pilot-scope-to-database-login.md",
+        "src/agent_os/postgresql.py",
+        "tests/test_postgresql_pilot.py"
+      ]
+    },
+    {
+      "id": "AOS-PILOT-002",
+      "goal": 15,
+      "title": "Exact one-shot read-only aggregate canary and authenticated metadata service",
+      "status": "verified",
+      "evidence": [
+        "deployment/container/Dockerfile.pilot",
+        "deployment/reference/pilot-canary.example.json",
+        "src/agent_os/pilot_canary.py",
+        "src/agent_os/pilot_service.py",
+        "tests/test_pilot_canary.py",
+        "tests/test_pilot_deployment.py"
+      ]
+    },
+    {
+      "id": "AOS-PILOT-003",
+      "goal": 15,
+      "title": "Validated isolated-project GCP topology with credential, duty, and failure isolation",
+      "status": "verified",
+      "evidence": [
+        "deployment/gcp/pilot",
+        "docs/operations/gcp-production-pilot.md",
+        "docs/reviews/goal-15-alpha-20-completion.md",
+        "tests/test_pilot_deployment.py"
+      ]
+    },
+    {
+      "id": "AOS-PILOT-004",
+      "goal": 15,
+      "title": "Zero-cost local-first pilot with storage, network, credential, and backup guards",
+      "status": "verified",
+      "evidence": [
+        "docs/decisions/0021-select-zero-cost-local-first-pilot.md",
+        "docs/operations/local-production-pilot.md",
+        "docs/reviews/local-pilot-2026-07-31.md",
+        "docs/reviews/local-pilot-restore-rehearsal-2026-07-31.md",
+        "src/agent_os/local_pilot.py",
+        "scripts/local_pilot.sh",
+        "tests/test_local_pilot.py"
+      ]
+    },
+    {
+      "id": "AOS-PM-001",
+      "goal": 16,
+      "title": "Milestone project control with explicit owners, evidence, risks, backup state, and next action",
+      "status": "verified",
+      "evidence": [
+        "AGENTS.md",
+        "CLAUDE.md",
+        "docs/PROJECT_STATUS.md",
+        "docs/operations/project-management.md",
+        "tests/test_project_controls.py"
+      ]
+    },
+    {
+      "id": "AOS-SCM-001",
+      "goal": 16,
+      "title": "Canonical private GitHub source backup with verified local-to-remote commit parity",
+      "status": "verified",
+      "evidence": [
+        "docs/PROJECT_STATUS.md",
+        "docs/operations/project-management.md",
+        "tests/test_project_controls.py"
+      ]
+    },
+    {
+      "id": "AOS-CI-001",
+      "goal": 16,
+      "title": "Protected remote CI for unit, PostgreSQL integration, and secret scanning gates",
+      "status": "implemented",
+      "evidence": [
+        ".github/workflows/ci.yml",
+        "docs/PROJECT_STATUS.md",
+        "docs/decisions/0022-keep-private-github-controls-zero-cost.md",
+        "docs/operations/project-management.md",
+        "tests/test_project_controls.py"
+      ]
+    },
+    {
+      "id": "AOS-CI-002",
+      "goal": 16,
+      "title": "Checksum-pinned read-only build assurance with staged adoption and rollback evidence",
+      "status": "implemented",
+      "evidence": [
+        ".github/workflows/ci.yml",
+        "docs/reviews/goal-16-build-assurance-evaluation.md",
+        "tests/test_project_controls.py"
+      ]
+    },
+    {
+      "id": "AOS-PILOT-005",
+      "goal": 16,
+      "title": "Four non-overlapping weekly read-only canaries with immutable evidence and verified backups",
+      "status": "captured",
+      "evidence": [
+        "docs/PROJECT_STATUS.md",
+        "docs/operations/project-management.md"
+      ]
+    }
+  ]
+}

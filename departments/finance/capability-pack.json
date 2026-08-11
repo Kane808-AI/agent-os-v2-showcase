@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "pack_id": "finance",
+  "version": "1.0.0",
+  "status": "accepted",
+  "policy_version": "1.0.0",
+  "department": "finance",
+  "owner_role": "finance-lead",
+  "verifier_role": "qa-verifier",
+  "execution_boundary": "shadow-only",
+  "objective_metrics": ["runway_days", "forecast_variance", "cash_reserve"],
+  "input_sources": [
+    {"source_type": "cash-position-export", "mode": "read_only"},
+    {"source_type": "approved-budget", "mode": "read_only"}
+  ],
+  "capabilities": [
+    {
+      "capability_id": "finance-cash-position-review",
+      "description": "Review cash position and runway without moving money.",
+      "allowed_modes": ["read_only", "proposal"],
+      "allowed_actions": ["finance.cash.review", "finance.forecast.propose"],
+      "required_evidence": ["dated cash export", "liability evidence", "approved budget"],
+      "outputs": ["cash position report", "forecast proposal"]
+    },
+    {
+      "capability_id": "finance-scenario-analysis",
+      "description": "Simulate bounded financial scenarios without approving commitments.",
+      "allowed_modes": ["read_only", "simulated"],
+      "allowed_actions": ["finance.scenario.analyze", "finance.budget.simulate"],
+      "required_evidence": ["assumptions", "baseline", "sensitivity range"],
+      "outputs": ["scenario comparison", "assumption register"]
+    }
+  ],
+  "additional_forbidden_actions": ["finance.commitment.approve", "finance.account.modify"],
+  "evaluation_cases": [
+    {"case_id": "finance-happy", "capability_id": "finance-cash-position-review", "requested_mode": "read_only", "action_type": "finance.cash.review", "expected": "accepted"},
+    {"case_id": "finance-boundary", "capability_id": "finance-scenario-analysis", "requested_mode": "external", "action_type": "banking.money-movement", "expected": "held"}
+  ]
+}

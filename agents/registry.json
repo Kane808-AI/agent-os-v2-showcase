@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "roles": [
+    {"constitution_id": "atlas", "activation": "core"},
+    {"constitution_id": "business-owner", "activation": "core"},
+    {"constitution_id": "qa-verifier", "activation": "core"},
+    {"constitution_id": "research-analyst", "activation": "core"},
+    {"constitution_id": "knowledge-steward", "activation": "core"},
+    {"constitution_id": "platform-reliability", "activation": "core"},
+    {"constitution_id": "strategy-advisor", "activation": "department"},
+    {"constitution_id": "operations-manager", "activation": "department"},
+    {"constitution_id": "marketing-lead", "activation": "department"},
+    {"constitution_id": "acquisition-manager", "activation": "specialist"},
+    {"constitution_id": "sales-manager", "activation": "department"},
+    {"constitution_id": "customer-success-manager", "activation": "department"},
+    {"constitution_id": "commerce-operator", "activation": "specialist"},
+    {"constitution_id": "creative-producer", "activation": "specialist"},
+    {"constitution_id": "channel-operator", "activation": "specialist"},
+    {"constitution_id": "product-manager", "activation": "department"},
+    {"constitution_id": "software-engineer", "activation": "department"},
+    {"constitution_id": "accounting-controller", "activation": "department"},
+    {"constitution_id": "finance-lead", "activation": "department"}
+  ]
+}

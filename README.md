@@ -99,6 +99,18 @@ before implementation.
 python3 -m unittest discover -s tests -v
 ```
 
+## The control plane
+
+The dashboard is the canonical operational surface. Chat channels are
+replaceable adapters; this is not.
+
+![Agent OS v2 runtime dashboard — the local control plane](docs/dashboard.png)
+
+![Objectives, autonomous work queue, evidence, and plan evaluations](docs/autonomous-work.png)
+
+Both captures come from the repository's own demos: run the commands below
+and you get this dashboard with your own simulated data.
+
 ## Run the local runtime slice
 
 The first vertical slice is local and side-effect free:

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent OS v2 — Platform Overview</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --panel:#ffffff; --panel-2:#eef1f6; --ink:#151a24; --muted:#5b6472;
+    --line:#dde2ea; --accent:#0a5f6b; --accent-2:#3a56d4; --good:#1f8a54; --warn:#b1780c; --hold:#8a3a9a;
+    --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0c1116; --panel:#131a22; --panel-2:#17202a; --ink:#e7ecf2; --muted:#8b96a5;
+      --line:#233040; --accent:#4fd7e8; --accent-2:#7c93ff; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:56px 24px 100px}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 14px;display:flex;align-items:center;gap:10px}
+  .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent)}
+  h1{font-size:36px;line-height:1.12;margin:0 0 12px;font-weight:800;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:17px;max-width:66ch;margin:0 0 28px}
+  .statusbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px}
+  .chip{font-family:var(--mono);font-size:12px;padding:7px 12px;border-radius:999px;
+    border:1px solid var(--line);background:var(--panel);color:var(--muted)}
+  .chip b{color:var(--ink)}
+  .chip.live{border-color:color-mix(in srgb, var(--good) 45%, var(--line));color:var(--good)}
+  .chip.held{border-color:color-mix(in srgb, var(--hold) 45%, var(--line));color:var(--hold)}
+
+  section{margin:52px 0}
+  h2{font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;
+    color:var(--muted);margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+  h3{font-size:19px;margin:0 0 8px;font-weight:700}
+  p{margin:0 0 14px;color:var(--ink)}
+  p.dim{color:var(--muted)}
+
+  .lineage{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .lineage div{background:var(--panel);padding:16px 18px}
+  .lineage .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--accent-2);margin-bottom:6px}
+  .lineage .v{font-size:13.5px;color:var(--muted)}
+
+  .stack{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+  .stack-row{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line)}
+  .stack-row:last-child{border-bottom:none}
+  .stack-row .idx{font-family:var(--mono);font-size:12px;color:var(--accent);width:22px;flex:none}
+  .stack-row .name{font-weight:700;width:170px;flex:none}
+  .stack-row .desc{color:var(--muted);font-size:14px}
+  .stack-row.kernel{background:color-mix(in srgb, var(--accent) 6%, var(--panel))}
+
+  .principles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .pcard{border:1px solid var(--line);border-radius:10px;padding:16px 18px;background:var(--panel)}
+  .pcard .num{font-family:var(--mono);font-size:11px;color:var(--accent-2);margin-bottom:6px}
+  .pcard p{margin:0;font-size:14px;color:var(--ink)}
+
+  .chain{display:flex;align-items:center;flex-wrap:wrap;gap:0;font-family:var(--mono);font-size:12.5px;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+  .chain .node{padding:7px 12px;border-radius:7px;background:var(--panel-2);border:1px solid var(--line)}
+  .chain .arrow{padding:0 10px;color:var(--muted)}
+  .chain .node.verified{border-color:color-mix(in srgb, var(--good) 50%, var(--line));color:var(--good)}
+
+  .goalboard{width:100%;border-collapse:collapse;font-size:13.5px}
+  .goalboard th,.goalboard td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .goalboard th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--muted);font-weight:600}
+  .goalboard td.g{font-family:var(--mono);color:var(--accent)}
+
+  .shots{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .shots figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+  .shots img{width:100%;display:block}
+  .shots figcaption{padding:12px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line)}
+
+  .repomap{font-family:var(--mono);font-size:12.5px;background:var(--panel-2);border:1px solid var(--line);
+    border-radius:10px;padding:16px 18px;color:var(--ink);overflow-x:auto;white-space:pre}
+
+  .close{border:1px solid var(--line);border-radius:12px;padding:22px 24px;background:var(--panel)}
+  .close .lead{font-weight:700;font-size:17px;margin-bottom:6px}
+
+  a{color:var(--accent-2)}
+  footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);
+    font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  footer a{color:var(--muted)}
+  @media (max-width:640px){
+    .principles{grid-template-columns:1fr}
+    .lineage{grid-template-columns:1fr}
+    .shots{grid-template-columns:1fr}
+    .stack-row{flex-wrap:wrap}
+    .stack-row .name{width:auto}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <div class="kicker">Platform Overview · Public Showcase Snapshot</div>
+  <h1>Agent OS v2</h1>
+  <p class="sub">A headless, event-driven operating system for autonomous business operations — built as a resellable platform, not a single client's automation. The kernel is business-agnostic; departments are optional modules; industry behavior lives in packs; every client supplies isolated configuration and credentials.</p>
+
+  <div class="statusbar">
+    <span class="chip live"><b>2.0.0-alpha.20</b> — Goals 1–15 complete</span>
+    <span class="chip">Goal 16 project control — in progress</span>
+    <span class="chip live">345 tests passing</span>
+    <span class="chip held">Paid GCP hosting — held</span>
+    <span class="chip held">Legacy cutover — held</span>
+  </div>
+
+  <section>
+    <h2>System lineage</h2>
+    <div class="lineage">
+      <div><div class="k">Agent OS v2 Platform</div><div class="v">This clean product build — the source of truth going forward</div></div>
+      <div><div class="k">Agent OS v1 Prototype</div><div class="v">Frozen prototype that still powers live jobs today</div></div>
+      <div><div class="k">OpenClaw Legacy</div><div class="v">Legacy knowledge, scripts, and remaining runtime dependencies</div></div>
+    </div>
+    <p class="dim" style="margin-top:14px">Neither legacy system is renamed, moved, or disabled until a documented cutover proves its replacement and its rollback.</p>
+  </section>
+
+  <section>
+    <h2>Product boundaries</h2>
+    <div class="stack">
+      <div class="stack-row kernel">
+        <div class="idx">01</div><div class="name">Platform kernel</div>
+        <div class="desc">Events, orchestration, policy, state, identity, audit, recovery — the part that is never client-specific.</div>
+      </div>
+      <div class="stack-row">
+        <div class="idx">02</div><div class="name">Departments</div>
+        <div class="desc">Finance, Accounting, Sales, Marketing, Operations, Customer Success, Product, Research, Engineering, QA.</div>
+      </div>
+      <div class="stack-row">
+        <div class="idx">03</div><div class="name">Industry packs</div>
+        <div class="desc">Reusable procedures and metrics scoped to a type of business — SEO/GEO, commerce, applications, and more.</div>
+      </div>
+      <div class="stack-row">
+        <div class="idx">04</div><div class="name">Client configuration</div>
+        <div class="desc">Objectives, accounts, thresholds, branding, and integrations for exactly one tenant.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Foundation principles</h2>
+    <div class="principles">
+      <div class="pcard"><div class="num">01</div><p>The dashboard is the control plane. Slack, Telegram, Discord, Teams, and email are replaceable channel adapters — never canonical.</p></div>
+      <div class="pcard"><div class="num">02</div><p>Atlas is event-driven. The durable system is always on; a chat session with a model is not.</p></div>
+      <div class="pcard"><div class="num">03</div><p>A deterministic policy engine — not an LLM — decides whether an action is automatic, notify-and-proceed, approval-required, or forbidden.</p></div>
+      <div class="pcard"><div class="num">04</div><p>Learning is evidence-driven and promoted through evaluation. Agents cannot rewrite safety policy, permissions, or their own evaluation criteria.</p></div>
+      <div class="pcard"><div class="num">05</div><p>Every tenant and legal entity is isolated by construction, not by convention.</p></div>
+      <div class="pcard"><div class="num">06</div><p>Financial access is read-only by default. Reconciliation and recommendations are autonomous; money movement is not.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Execution truth</h2>
+    <p>Every claimed action moves through an explicit evidence chain before it counts as done. Nothing short-circuits from "attempted" to "verified."</p>
+    <div class="chain">
+      <span class="node">claimed</span><span class="arrow">→</span>
+      <span class="node">attempted</span><span class="arrow">→</span>
+      <span class="node">observed</span><span class="arrow">→</span>
+      <span class="node verified">verified</span>
+      <span class="arrow">/</span><span class="node">disproved</span>
+      <span class="arrow">/</span><span class="node">inconclusive</span>
+    </div>
+    <p class="dim" style="margin-top:14px">External attempts require a fresh target precondition. Completion claims require fresh post-attempt read-back evidence, reviewed by a separate, independent QA actor — not the agent that did the work.</p>
+  </section>
+
+  <section>
+    <h2>Build sequence — selected goals</h2>
+    <table class="goalboard">
+      <thead><tr><th>Goal</th><th>What it locked in</th></tr></thead>
+      <tbody>
+        <tr><td class="g">6</td><td>19 reusable, versioned role constitutions with distinct SOUL files and boundary evaluations.</td></tr>
+        <tr><td class="g">7</td><td>Governed knowledge catalog with source-hash inventory and scoped, purpose-bound retrieval.</td></tr>
+        <tr><td class="g">8</td><td>Immutable execution-evidence receipts; completion claims fail closed without verified evidence.</td></tr>
+        <tr><td class="g">10–11</td><td>Offline model-routing control plane plus a one-shot runtime that resolves credentials outside the database and never auto-falls-back.</td></tr>
+        <tr><td class="g">12</td><td>Northwind affiliate shadow loop — read-only sources, frozen research windows, independent re-verification before anything becomes learning.</td></tr>
+        <tr><td class="g">13</td><td>Portfolio capability packs across 13 business functions, every one read-only and inert until explicitly activated.</td></tr>
+        <tr><td class="g">14</td><td>Production packaging contract: PostgreSQL, hosted secrets, external KMS attestation, staged one-capability-at-a-time cutover.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>The control plane, running</h2>
+    <div class="shots">
+      <figure>
+        <img src="dashboard.png" alt="Agent OS v2 runtime dashboard">
+        <figcaption>The local runtime dashboard — the canonical operational surface, not a chat window.</figcaption>
+      </figure>
+      <figure>
+        <img src="autonomous-work.png" alt="Objectives, autonomous work queue, and evidence">
+        <figcaption>Objectives, the autonomous work queue, evidence, and plan evaluations in one view.</figcaption>
+      </figure>
+    </div>
+    <p class="dim" style="margin-top:14px">Both captures come from the repository's own demos — run <code>agent_os.cli demo</code> and <code>serve-dashboard</code> and you get this same view against your own simulated data.</p>
+  </section>
+
+  <section>
+    <h2>Repository map</h2>
+    <div class="repomap">src/agent_os/              executable kernel contracts
+agents/                    shared constitution, role contracts, SOUL files, evals
+departments/               reusable business-department modules
+packs/                     industry and reference packs
+docs/architecture/         binding architectural contracts
+docs/decisions/            architecture decision records
+docs/requirements/         master requirements and verification traceability
+docs/operations/           operator and recovery runbooks
+knowledge/                 governed catalog and scoped reference-pack knowledge
+migrations/                legacy inventory and cutover ledger
+deployment/                production qualification and tenant-package contracts
+tests/                     executable contract tests</div>
+  </section>
+
+  <section class="close">
+    <div class="lead">Why this shape, not a bigger model.</div>
+    <p>The hard part was never getting an agent to attempt something. It's knowing — with evidence, not a transcript — whether the attempt actually happened, and stopping the system from grading its own homework. That's what the evidence chain, the independent QA boundary, and the default-deny policy engine are for. The platform is designed to be sold and operated across clients, not rebuilt for each one.</p>
+  </section>
+
+  <footer>
+    <span>Public showcase snapshot — reference tenant renamed, client-specific identifiers generalized. Architecture, decision records, and CI are unchanged.</span>
+    <a href="https://github.com/Kane808-AI/agent-os-v2-showcase">github.com/Kane808-AI/agent-os-v2-showcase</a>
+  </footer>
+
+</main>
+</body>
+</html>
